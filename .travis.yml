@@ -15,3 +15,19 @@ install:
 - make download
 script:
 - make publish
+env:
+  global:
+    secure: qoVdsvd5e1xnLPxky3grDv0CgYVCbzvfQvzeXMAw96KB0rKzQov+A5ogA5cFhH40xDTkFmzC8b9Z28miD5RaHWqIlfXdE0flGrvJLPiqPs8XBnMqqeavxcNQ1JLB9TtZF3ty5nzea+/pL211kWVfq3HzKSx7Yq/OpMx2MSKngURBgBb0As7hSsDPRNKlTZmdnX/NRD8RdfvRveZe6Wd+AsAhxt/MI6ZSJcVavsQUbujAF/zDVGvA3u+/pSSOsu7n2Wn9u41ftUNfqF/yglKrs93VdIWitE9I0txNDFRN/tUr5/847KrHIFlgqGkI725Z52KvDzuCsQl6v8kuwqygUDKoz9yDOvxRrY5yAT50IMxYCJQPmswWlBpFzNpOIrxmP0VbQBGrZn6JVbyPpUDroTsWeRlTpZM6Apv4tdsdwVt4gc3T1Frme7XIChPeFzUTT4cxnJoA5FS1LNU5RVHRsOSeeAuIF/H8Bc3pLzyGW2Z1SwQsmvPaDB23/LO70IjzM6y/xFBc4tbYGOkBIy/GrVm9E4uBHwIQXWfFUwf72zEOjh/JfLDRVGuiSQULovisXbi7WzCbG7zEtfIxAsy+iTT5mU4LgoIyZ7/1YUhpELal/N+X05ZeAVsXlCxg9PaqHYlZGnXLjzNu78yrDjuXq3q7MxXfB3Pgri09W94Vozc=
+after_success:
+- git config --global user.email "travis@travis-ci.org"
+- git config --global user.name "Travis"
+- git config --global push.default simple
+- echo "Clone PotapovAS.github.io..."
+- git clone --depth 1 https://${GH_TOKEN}@github.com/PotapovAS/PotapovAS.github.io.git > /dev/null
+- cd PotapovAS.github.io
+- git rm -rf * > /dev/null
+- cp -r  ../output/* .
+- git add .
+- git status
+- git commit -m "Pushed by Travis CI"
+- git push --quiet
