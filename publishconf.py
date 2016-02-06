@@ -10,15 +10,21 @@ import sys
 sys.path.append(os.curdir)
 from pelicanconf import *
 
-SITEURL = 'https://PotapovAS.github.io'
+SITEURL = 'http://iamemmanouil.com'
 RELATIVE_URLS = False
 
-FEED_ALL_ATOM = False
-CATEGORY_FEED_ATOM = False
+FEED_ALL_ATOM = 'feeds/all.atom.xml'
+CATEGORY_FEED_ATOM = 'feeds/%s.atom.xml'
 
 DELETE_OUTPUT_DIRECTORY = True
 
 # Following items are often useful when publishing
 
-#DISQUS_SITENAME = ""
-#GOOGLE_ANALYTICS = ""
+# Google Analytics
+GOOGLE_ANALYTICS = "UA-6891078-38"
+
+# Disqus Comments
+DISQUS_SITENAME = "iamemmanouil"
+
+# Domain
+DOMAIN = "iamemmanouil.com"

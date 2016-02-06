@@ -1,32 +1,19 @@
+branches:
+  only:
+  - src
 language: python
 python:
 - '2.7'
-branches:
-  only:
-  - master
-addons:
-  apt:
-    packages:
-    - language-pack-en
-    - language-pack-zh-hant
-    - language-pack-th
+before_install:
+- npm install -g grunt-cli
 install:
 - pip install -r requirements.txt
+- npm install
 script:
-- make publish
+- grunt deploy
+after_success:
+- bash deploy.sh
+
 env:
   global:
-    secure: qoVdsvd5e1xnLPxky3grDv0CgYVCbzvfQvzeXMAw96KB0rKzQov+A5ogA5cFhH40xDTkFmzC8b9Z28miD5RaHWqIlfXdE0flGrvJLPiqPs8XBnMqqeavxcNQ1JLB9TtZF3ty5nzea+/pL211kWVfq3HzKSx7Yq/OpMx2MSKngURBgBb0As7hSsDPRNKlTZmdnX/NRD8RdfvRveZe6Wd+AsAhxt/MI6ZSJcVavsQUbujAF/zDVGvA3u+/pSSOsu7n2Wn9u41ftUNfqF/yglKrs93VdIWitE9I0txNDFRN/tUr5/847KrHIFlgqGkI725Z52KvDzuCsQl6v8kuwqygUDKoz9yDOvxRrY5yAT50IMxYCJQPmswWlBpFzNpOIrxmP0VbQBGrZn6JVbyPpUDroTsWeRlTpZM6Apv4tdsdwVt4gc3T1Frme7XIChPeFzUTT4cxnJoA5FS1LNU5RVHRsOSeeAuIF/H8Bc3pLzyGW2Z1SwQsmvPaDB23/LO70IjzM6y/xFBc4tbYGOkBIy/GrVm9E4uBHwIQXWfFUwf72zEOjh/JfLDRVGuiSQULovisXbi7WzCbG7zEtfIxAsy+iTT5mU4LgoIyZ7/1YUhpELal/N+X05ZeAVsXlCxg9PaqHYlZGnXLjzNu78yrDjuXq3q7MxXfB3Pgri09W94Vozc=
-after_success:
-- git config --global user.email "travis@travis-ci.org"
-- git config --global user.name "Travis"
-- git config --global push.default simple
-- echo "Clone PotapovAS.github.io..."
-- git clone --depth 1 https://${GH_TOKEN}@github.com/PotapovAS/PotapovAS.github.io.git > /dev/null
-- cd PotapovAS.github.io
-- git rm -rf * > /dev/null
-- cp -r  ../output/* .
-- git add .
-- git status
-- git commit -m "Pushed by Travis CI"
-- git push --quiet
+    secure: tx4fGtZAo0lCdscJntByedsZyM6GgRfoDRFsQ7cxbSnevj3EVcMeKLp6JekMdjMP8LnvD7/h7HEFhxmOKU1HCN4utyrUcQcIuglQVqQaJJKpFV3T2t5FYwDvsGK5x4WDOx2+ncj5uJgcCEwj2P6W2m/Cs9aPx0Jy9dFlapUL0xIrJ2hpe5AgABkhEWzpI7+MgMmWxDTK59VROgCEyqHJolJoboXZ/GOCcvKGq9+QmF0SyBADsGxS9qKxmpryhcpMZ9QHumS9DBEa3mumMicnC80sUp/eqZlw1m1ooQ8Oc2aHsuGnqz/ucZlpWT2mdP7f7UU5FHhpEvZn9822sNYuD+bt0mxcP2tLSMaRiL1xaSnFcNengyuVF1WFohi0D2M+a3srH6C7WZ/joiaK+zUMl4Kha3QaUnM3vEr4XUoWfsIT3B618Vqw5EopqrzDXx59xihDghHlCs1D7hiA5gUpmIxLXGmfb+EzXPHgbWmCibJyM3nHpVNI4GgloWF4u3mfrYN9Pcqi3mNxy3E+BsT/NO0weqi9jRT/uQlFToTc/PQ4i8E+1Q4Vl9RX4q+gfwEMrXtIksOWaF1Ii7ZARk7cnBckHPc2z2YEq+LhtnYkVA4YU6+6PDbn/dcK277lW7jjzkuyjoATUxTR8TVRpnQWEb+FtDctjcNOfOrATeEN8xo=
